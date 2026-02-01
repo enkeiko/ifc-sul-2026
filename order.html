@@ -633,6 +633,12 @@
     </div>
 
     <script>
+        // ============================================
+        // Google Sheets API URL (Apps Script 배포 URL)
+        // ============================================
+        const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
+        // 위 URL을 Google Apps Script 배포 URL로 변경하세요
+
         // Toggle product selection
         function toggleProduct(element, id) {
             const checkbox = document.getElementById(id);
@@ -660,8 +666,11 @@
         });
 
         // Form submit
-        document.getElementById('orderForm').addEventListener('submit', function(e) {
+        document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
 
             // Collect form data
             const formData = {
@@ -675,15 +684,44 @@
 
             // Get selected products with quantities
             document.querySelectorAll('.product-option.selected').forEach(el => {
-                const name = el.querySelector('.product-name').textContent;
+                const name = el.querySelector('.product-name').textContent.replace(/BEST|PREMIUM/g, '').trim();
                 const qty = el.querySelector('.qty-value').textContent;
                 formData.products.push({ name, qty });
             });
 
             console.log('Form submitted:', formData);
 
-            // Show success modal
-            document.getElementById('successModal').classList.add('show');
+            // Google Sheets에 저장
+            if (GOOGLE_SCRIPT_URL && GOOGLE_SCRIPT_URL !== 'YOUR_GOOGLE_SCRIPT_URL_HERE') {
+                try {
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = '전송 중...';
+
+                    const response = await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+
+                    // no-cors 모드에서는 응답을 읽을 수 없으므로 성공으로 처리
+                    console.log('Data sent to Google Sheets');
+                    document.getElementById('successModal').classList.add('show');
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('전송 중 오류가 발생했습니다. 전화로 문의해 주세요.\n02-6137-5979');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }
+            } else {
+                // API URL이 설정되지 않은 경우 (테스트 모드)
+                console.warn('Google Script URL not configured. Running in test mode.');
+                document.getElementById('successModal').classList.add('show');
+            }
         });
     </script>
 </body>
