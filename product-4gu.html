@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>4구 인절미세트 - 원조공주떡집 IFC몰점</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brown-dark: #2A1810;
+            --brown-main: #3D2314;
+            --brown-light: #5D3A1A;
+            --gold: #D4AF37;
+            --gold-light: rgba(212, 175, 55, 0.15);
+            --ivory: #FFFAF0;
+            --beige: #F5EFE7;
+            --white: #FFFFFF;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--ivory);
+            color: var(--brown-main);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--white);
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(61, 35, 20, 0.1);
+        }
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--brown-main);
+            border-radius: 8px;
+        }
+        .header-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            background: var(--beige);
+        }
+        .product-content {
+            padding: 24px 20px;
+        }
+        .product-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: var(--beige);
+            color: var(--brown-light);
+        }
+        .product-name {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--brown-main);
+            margin-bottom: 8px;
+        }
+        .product-price {
+            font-size: 26px;
+            font-weight: 700;
+            color: #8B4513;
+            margin-bottom: 20px;
+        }
+        .product-desc {
+            font-size: 15px;
+            color: var(--brown-light);
+            line-height: 1.8;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(61, 35, 20, 0.1);
+        }
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--brown-main);
+            margin-bottom: 12px;
+        }
+        .contents-list {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        .contents-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(61, 35, 20, 0.06);
+            font-size: 15px;
+        }
+        .contents-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .info-box {
+            background: var(--beige);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        .info-box p {
+            font-size: 13px;
+            color: var(--brown-light);
+            line-height: 1.7;
+        }
+        .cta-section {
+            padding: 20px;
+            background: var(--white);
+            border-top: 1px solid rgba(61, 35, 20, 0.1);
+            position: sticky;
+            bottom: 0;
+        }
+        .cta-btn {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            background: var(--gold);
+            color: var(--brown-main);
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: 'Noto Sans KR', sans-serif;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="back-btn" onclick="history.back()">←</button>
+            <span class="header-title">상품 상세</span>
+        </header>
+
+        <img src="images/set_4gu_29000.webp" alt="4구 인절미세트" class="product-image">
+
+        <div class="product-content">
+            <span class="product-badge">인절미 전문</span>
+            <h1 class="product-name">4구 인절미세트</h1>
+            <p class="product-price">29,000원</p>
+
+            <p class="product-desc">
+                인절미를 좋아하시는 분께 딱 맞는 4종 콩고물 인절미 세트입니다.
+                각기 다른 콩고물의 풍미를 느낄 수 있어
+                질리지 않고 다양하게 즐기실 수 있습니다.
+                쫄깃한 찹쌀떡과 고소한 콩고물의 조화를 경험해보세요.
+            </p>
+
+            <h3 class="section-title">구성품</h3>
+            <ul class="contents-list">
+                <li>콩고물 인절미 1팩</li>
+                <li>쑥 인절미 1팩</li>
+                <li>흑임자 인절미 1팩</li>
+                <li>볶은콩 인절미 1팩</li>
+            </ul>
+
+            <div class="info-box">
+                <p>
+                    <strong>보관방법:</strong> 냉동 보관 / 실온 해동 후 섭취<br>
+                    <strong>유통기한:</strong> 제조일로부터 냉동 30일<br>
+                    <strong>원산지:</strong> 국내산 찹쌀 100%
+                </p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <a href="order.html" class="cta-btn">주문 신청하기</a>
+        </div>
+    </div>
+</body>
+</html>

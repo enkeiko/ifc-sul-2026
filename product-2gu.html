@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2구 선물세트 - 원조공주떡집 IFC몰점</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brown-dark: #2A1810;
+            --brown-main: #3D2314;
+            --brown-light: #5D3A1A;
+            --gold: #D4AF37;
+            --gold-light: rgba(212, 175, 55, 0.15);
+            --ivory: #FFFAF0;
+            --beige: #F5EFE7;
+            --white: #FFFFFF;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--ivory);
+            color: var(--brown-main);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--white);
+            min-height: 100vh;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(61, 35, 20, 0.1);
+        }
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--brown-main);
+            border-radius: 8px;
+        }
+        .header-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            background: var(--beige);
+        }
+        .product-content {
+            padding: 24px 20px;
+        }
+        .product-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: var(--beige);
+            color: var(--brown-light);
+        }
+        .product-badge.best {
+            background: var(--gold-light);
+            color: var(--gold);
+        }
+        .product-badge.premium {
+            background: rgba(139, 69, 19, 0.12);
+            color: #8B4513;
+        }
+        .product-name {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--brown-main);
+            margin-bottom: 8px;
+        }
+        .product-price {
+            font-size: 26px;
+            font-weight: 700;
+            color: #8B4513;
+            margin-bottom: 20px;
+        }
+        .product-desc {
+            font-size: 15px;
+            color: var(--brown-light);
+            line-height: 1.8;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(61, 35, 20, 0.1);
+        }
+        .section-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--brown-main);
+            margin-bottom: 12px;
+        }
+        .contents-list {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+        .contents-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(61, 35, 20, 0.06);
+            font-size: 15px;
+        }
+        .contents-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .info-box {
+            background: var(--beige);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+        }
+        .info-box p {
+            font-size: 13px;
+            color: var(--brown-light);
+            line-height: 1.7;
+        }
+        .cta-section {
+            padding: 20px;
+            background: var(--white);
+            border-top: 1px solid rgba(61, 35, 20, 0.1);
+            position: sticky;
+            bottom: 0;
+        }
+        .cta-btn {
+            display: block;
+            width: 100%;
+            padding: 18px 24px;
+            background: var(--gold);
+            color: var(--brown-main);
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: 'Noto Sans KR', sans-serif;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="back-btn" onclick="history.back()">←</button>
+            <span class="header-title">상품 상세</span>
+        </header>
+
+        <img src="images/set_2gu_19000.webp" alt="2구 선물세트" class="product-image">
+
+        <div class="product-content">
+            <span class="product-badge">입문 추천</span>
+            <h1 class="product-name">2구 선물세트</h1>
+            <p class="product-price">19,000원</p>
+
+            <p class="product-desc">
+                부담 없이 마음을 전하기 좋은 알찬 구성의 선물세트입니다.
+                쫀득한 인절미와 색색의 오색송편이 한 박스에 담겨
+                받는 분의 눈과 입을 즐겁게 해드립니다.
+                고급스러운 전통 문양 패키지로 품격을 더했습니다.
+            </p>
+
+            <h3 class="section-title">구성품</h3>
+            <ul class="contents-list">
+                <li>흑임자 인절미 1팩</li>
+                <li>오색송편 1팩 (5가지 색상)</li>
+                <li>전통 문양 선물 박스</li>
+            </ul>
+
+            <div class="info-box">
+                <p>
+                    <strong>보관방법:</strong> 냉동 보관 / 실온 해동 후 섭취<br>
+                    <strong>유통기한:</strong> 제조일로부터 냉동 30일<br>
+                    <strong>원산지:</strong> 국내산 찹쌀 100%
+                </p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <a href="order.html" class="cta-btn">주문 신청하기</a>
+        </div>
+    </div>
+</body>
+</html>

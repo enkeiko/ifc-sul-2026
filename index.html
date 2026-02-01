@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026 설 선물세트 - 원조공주떡집 IFC몰점</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brown-dark: #2A1810;
+            --brown-main: #3D2314;
+            --brown-light: #5D3A1A;
+            --gold: #D4AF37;
+            --gold-light: rgba(212, 175, 55, 0.15);
+            --ivory: #FFFAF0;
+            --beige: #F5EFE7;
+            --white: #FFFFFF;
+            --naver: #03C75A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--ivory);
+            color: var(--brown-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--ivory);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            background: var(--ivory);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(61, 35, 20, 0.1);
+        }
+
+        .logo {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--brown-main);
+        }
+
+        .branch-badge {
+            background: var(--brown-main);
+            color: var(--white);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(160deg, #2A1810 0%, #3D2314 60%, #4A2C1C 100%);
+            padding: 60px 24px 48px;
+            text-align: center;
+        }
+
+        .year-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid var(--gold);
+            border-radius: 20px;
+            background: var(--gold-light);
+            color: var(--gold);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+
+        .hero-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        .hero-sub {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.7;
+        }
+
+        /* Section */
+        .section {
+            padding: 48px 24px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--brown-main);
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        /* Product Cards */
+        .product-card {
+            display: block;
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.08);
+            margin-bottom: 24px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-card:active {
+            transform: translateY(-2px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #F5EFE7;
+        }
+
+        .product-info {
+            padding: 16px 20px 20px;
+        }
+
+        .product-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .product-badge.best {
+            background: var(--gold-light);
+            color: var(--gold);
+        }
+
+        .product-badge.new {
+            background: rgba(139, 69, 19, 0.12);
+            color: #8B4513;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--brown-main);
+            margin-bottom: 4px;
+        }
+
+        .product-desc {
+            font-size: 14px;
+            color: rgba(93, 58, 26, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: #8B4513;
+        }
+
+        /* Order Info */
+        .order-section {
+            background: linear-gradient(180deg, #F5EFE7 0%, #EDE5DA 100%);
+        }
+
+        .info-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gold-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .info-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--brown-main);
+            margin-bottom: 2px;
+        }
+
+        .info-desc {
+            font-size: 13px;
+            color: rgba(93, 58, 26, 0.6);
+        }
+
+        /* Store Info */
+        .store-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.08);
+        }
+
+        .map-container {
+            display: block;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background: #E8DFD5;
+        }
+
+        .map-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .store-detail {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: flex-start;
+        }
+
+        .store-detail-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            width: 24px;
+        }
+
+        .store-detail-text {
+            font-size: 14px;
+            color: var(--brown-main);
+            line-height: 1.5;
+        }
+
+        .naver-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--naver);
+            color: var(--white);
+            padding: 14px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 16px;
+            transition: opacity 0.2s;
+        }
+
+        .naver-link:hover {
+            opacity: 0.9;
+        }
+
+        .naver-link:active {
+            opacity: 0.8;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(160deg, #2A1810 0%, #3D2314 60%, #4A2C1C 100%);
+            padding: 48px 24px;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .cta-sub {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 24px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cta-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .cta-btn:active {
+            transform: scale(0.98);
+        }
+
+        .cta-btn.primary {
+            background: var(--gold);
+            color: var(--brown-main);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1A100A;
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 16px;
+        }
+
+        .footer-divider {
+            width: 40px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto 16px;
+        }
+
+        .footer-info {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.3);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .footer-copy {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">원조공주떡집</div>
+            <span class="branch-badge">IFC몰점</span>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <span class="year-badge">2026 병오년 설</span>
+            <h1 class="hero-title">마음을 전하는<br>설 선물세트</h1>
+            <p class="hero-sub">400년 전통의 정성을 담아<br>소중한 분께 감사의 마음을 전하세요</p>
+        </section>
+
+        <!-- Gift Sets -->
+        <section class="section">
+            <p class="section-label">GIFT SET LINEUP</p>
+            <h2 class="section-title">설 선물세트 라인업</h2>
+
+            <!-- 2구 선물세트 -->
+            <a href="product-2gu.html" class="product-card">
+                <img src="images/set_2gu_19000.webp" alt="2구 선물세트" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-name">2구 선물세트</h3>
+                    <p class="product-desc">인절미 + 오색송편 구성</p>
+                    <p class="product-price">19,000원</p>
+                </div>
+            </a>
+
+            <!-- 3구 선물세트 -->
+            <a href="product-3gu.html" class="product-card">
+                <img src="images/set_3gu_24000.webp" alt="3구 선물세트" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-name">3구 선물세트</h3>
+                    <p class="product-desc">흑임자인절미 + 오색경단 + 콩고물인절미</p>
+                    <p class="product-price">24,000원</p>
+                </div>
+            </a>
+
+            <!-- 4구 인절미세트 -->
+            <a href="product-4gu.html" class="product-card">
+                <img src="images/set_4gu_29000.webp" alt="4구 인절미세트" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-name">4구 인절미세트</h3>
+                    <p class="product-desc">4종 콩고물 인절미 (콩/쑥/흑임자/볶은콩)</p>
+                    <p class="product-price">29,000원</p>
+                </div>
+            </a>
+
+            <!-- 6구 종합세트 - BEST -->
+            <a href="product-6gu.html" class="product-card">
+                <img src="images/set_6gu_49000.webp" alt="6구 종합세트" class="product-img">
+                <div class="product-info">
+                    <span class="product-badge best">BEST</span>
+                    <h3 class="product-name">6구 종합세트</h3>
+                    <p class="product-desc">인절미 4종 + 찹쌀떡 종합 구성</p>
+                    <p class="product-price">49,000원</p>
+                </div>
+            </a>
+
+            <!-- 찹쌀떡세트 -->
+            <a href="product-chapssal.html" class="product-card">
+                <img src="images/set_chapssal_50000.webp" alt="찹쌀떡세트" class="product-img">
+                <div class="product-info">
+                    <h3 class="product-name">찹쌀떡세트</h3>
+                    <p class="product-desc">15구 프리미엄 찹쌀떡</p>
+                    <p class="product-price">50,000원</p>
+                </div>
+            </a>
+
+            <!-- 고급한지세트 - PREMIUM -->
+            <a href="product-hanji.html" class="product-card">
+                <img src="images/set_hanji_80000.webp" alt="고급한지세트" class="product-img">
+                <div class="product-info">
+                    <span class="product-badge new">PREMIUM</span>
+                    <h3 class="product-name">고급한지세트</h3>
+                    <p class="product-desc">인절미 + 찹쌀떡 종합 / 한지 포장</p>
+                    <p class="product-price">80,000원</p>
+                </div>
+            </a>
+        </section>
+
+        <!-- Order Info -->
+        <section class="section order-section">
+            <p class="section-label">ORDER GUIDE</p>
+            <h2 class="section-title">주문 및 배송 안내</h2>
+
+            <div class="info-card">
+                <div class="info-icon">📅</div>
+                <div>
+                    <p class="info-title">주문 마감</p>
+                    <p class="info-desc">설 연휴 3일 전까지</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">🚚</div>
+                <div>
+                    <p class="info-title">배송 안내</p>
+                    <p class="info-desc">전국 택배 / 당일 픽업 가능</p>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <div class="info-icon">💳</div>
+                <div>
+                    <p class="info-title">결제 방법</p>
+                    <p class="info-desc">카드 / 계좌이체 / 현장결제</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Store Info -->
+        <section class="section">
+            <p class="section-label">VISIT US</p>
+            <h2 class="section-title">IFC몰점 안내</h2>
+
+            <div class="store-card">
+                <!-- Naver Map Embed -->
+                <a href="https://m.place.naver.com/restaurant/1213930359/location" target="_blank" class="map-container">
+                    <img src="images/map_ifc.webp" alt="원조공주떡집 IFC몰점 지도" class="map-img">
+                </a>
+
+                <div class="store-detail">
+                    <span class="store-detail-icon">📍</span>
+                    <span class="store-detail-text">서울 영등포구 국제금융로 10<br>IFC몰 지하2층 (여의도역 연결통로)</span>
+                </div>
+
+                <div class="store-detail">
+                    <span class="store-detail-icon">🕐</span>
+                    <span class="store-detail-text">월-금 08:00-21:30 / 토 08:00-21:00<br>일요일 08:00-20:00</span>
+                </div>
+
+                <div class="store-detail">
+                    <span class="store-detail-icon">📞</span>
+                    <a href="tel:0507-1359-5289" class="store-detail-text" style="color: var(--brown-main); text-decoration: none;">0507-1359-5289</a>
+                </div>
+
+                <a href="https://m.place.naver.com/restaurant/1213930359/location" target="_blank" class="naver-link">
+                    <span style="font-weight: 700;">N</span>
+                    네이버 지도에서 보기
+                </a>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <h2 class="cta-title">지금 바로 주문하세요</h2>
+            <p class="cta-sub">온라인 신청 또는 전화로 편하게 주문하세요</p>
+
+            <div class="cta-buttons">
+                <a href="order.html" class="cta-btn primary">
+                    주문/상담 신청하기
+                </a>
+                <a href="tel:0507-1359-5289" class="cta-btn secondary">
+                    전화 문의 0507-1359-5289
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p class="footer-logo">원조공주떡집 IFC몰점</p>
+            <div class="footer-divider"></div>
+            <p class="footer-info">
+                사업자등록번호: 000-00-00000<br>
+                대표: 홍길동
+            </p>
+            <p class="footer-copy">(C) 2026 원조공주떡집. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

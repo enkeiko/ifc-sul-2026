@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>주문/상담 신청 - 원조공주떡집 IFC몰점</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=Noto+Serif+KR:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brown-dark: #2A1810;
+            --brown-main: #3D2314;
+            --brown-light: #5D3A1A;
+            --gold: #D4AF37;
+            --gold-light: rgba(212, 175, 55, 0.15);
+            --ivory: #FFFAF0;
+            --beige: #F5EFE7;
+            --white: #FFFFFF;
+            --error: #DC3545;
+            --success: #28A745;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--ivory);
+            color: var(--brown-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--ivory);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 24px;
+            background: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(61, 35, 20, 0.1);
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--brown-main);
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background: var(--beige);
+        }
+
+        .header-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--brown-main);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(160deg, #2A1810 0%, #3D2314 60%, #4A2C1C 100%);
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .hero-sub {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Form */
+        .form-section {
+            padding: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--brown-main);
+            margin-bottom: 8px;
+        }
+
+        .form-label .required {
+            color: var(--error);
+            margin-left: 2px;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            font-family: 'Noto Sans KR', sans-serif;
+            border: 1px solid rgba(61, 35, 20, 0.2);
+            border-radius: 12px;
+            background: var(--white);
+            color: var(--brown-main);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px var(--gold-light);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: rgba(61, 35, 20, 0.4);
+        }
+
+        .form-select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%233D2314' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 44px;
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Radio Group */
+        .radio-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .radio-option {
+            flex: 1;
+        }
+
+        .radio-option input {
+            display: none;
+        }
+
+        .radio-option label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 16px;
+            background: var(--white);
+            border: 1px solid rgba(61, 35, 20, 0.2);
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--brown-main);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .radio-option input:checked + label {
+            background: var(--gold-light);
+            border-color: var(--gold);
+            color: var(--brown-main);
+        }
+
+        /* Product Selection */
+        .product-option {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            background: var(--white);
+            border: 1px solid rgba(61, 35, 20, 0.2);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .product-option:hover {
+            border-color: rgba(61, 35, 20, 0.3);
+        }
+
+        .product-option.selected {
+            background: var(--gold-light);
+            border-color: var(--gold);
+        }
+
+        .product-option input {
+            display: none;
+        }
+
+        .product-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(61, 35, 20, 0.3);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+
+        .product-option.selected .product-checkbox {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .product-checkbox::after {
+            content: '✓';
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 700;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .product-option.selected .product-checkbox::after {
+            opacity: 1;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--brown-main);
+            margin-bottom: 2px;
+        }
+
+        .product-price {
+            font-size: 14px;
+            font-weight: 700;
+            color: #8B4513;
+        }
+
+        .product-qty {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(61, 35, 20, 0.2);
+            border-radius: 8px;
+            background: var(--white);
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brown-main);
+            transition: all 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: var(--beige);
+        }
+
+        .qty-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .qty-value {
+            width: 40px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Divider */
+        .divider {
+            height: 8px;
+            background: var(--beige);
+            margin: 0 -24px;
+        }
+
+        /* Submit */
+        .submit-section {
+            padding: 24px;
+            background: var(--white);
+            border-top: 1px solid rgba(61, 35, 20, 0.1);
+            position: sticky;
+            bottom: 0;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px 24px;
+            background: var(--gold);
+            color: var(--brown-main);
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 700;
+            font-family: 'Noto Sans KR', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #C9A432;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        .submit-btn:disabled {
+            background: rgba(61, 35, 20, 0.2);
+            color: rgba(61, 35, 20, 0.4);
+            cursor: not-allowed;
+        }
+
+        /* Notice */
+        .notice {
+            background: var(--beige);
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+        }
+
+        .notice-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--brown-main);
+            margin-bottom: 8px;
+        }
+
+        .notice-text {
+            font-size: 12px;
+            color: var(--brown-light);
+            line-height: 1.6;
+        }
+
+        /* Success Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
+            max-width: 320px;
+            width: 100%;
+        }
+
+        .modal-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--gold-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+        }
+
+        .modal-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--brown-main);
+            margin-bottom: 8px;
+        }
+
+        .modal-text {
+            font-size: 14px;
+            color: var(--brown-light);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: var(--gold);
+            color: var(--brown-main);
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: 'Noto Sans KR', sans-serif;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <button class="back-btn" onclick="history.back()">←</button>
+            <h1 class="header-title">주문/상담 신청</h1>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <h2 class="hero-title">2026 설 선물세트</h2>
+            <p class="hero-sub">간편하게 신청하시면 연락드리겠습니다</p>
+        </section>
+
+        <!-- Form -->
+        <form id="orderForm" class="form-section">
+            <!-- 신청 유형 -->
+            <div class="form-group">
+                <label class="form-label">신청 유형<span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="type" id="type-order" value="주문" checked>
+                        <label for="type-order">주문 신청</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="type" id="type-consult" value="상담">
+                        <label for="type-consult">상담 신청</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 이름 -->
+            <div class="form-group">
+                <label class="form-label" for="name">이름<span class="required">*</span></label>
+                <input type="text" id="name" class="form-input" placeholder="홍길동" required>
+            </div>
+
+            <!-- 연락처 -->
+            <div class="form-group">
+                <label class="form-label" for="phone">연락처<span class="required">*</span></label>
+                <input type="tel" id="phone" class="form-input" placeholder="010-1234-5678" required>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- 선물세트 선택 -->
+            <div class="form-group" style="padding-top: 24px;">
+                <label class="form-label">선물세트 선택</label>
+
+                <div class="product-option" onclick="toggleProduct(this, 'set1')">
+                    <input type="checkbox" name="products" value="2구 선물세트" id="set1">
+                    <div class="product-checkbox"></div>
+                    <div class="product-info">
+                        <p class="product-name">2구 선물세트</p>
+                        <p class="product-price">19,000원</p>
+                    </div>
+                    <div class="product-qty">
+                        <button type="button" class="qty-btn" onclick="event.stopPropagation(); changeQty('set1', -1)">-</button>
+                        <span class="qty-value" id="qty-set1">1</span>
+                        <button type="button" class="qty-btn" onclick="event.stopPropagation(); changeQty('set1', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="product-option" onclick="toggleProduct(this, 'set2')">
+                    <input type="checkbox" name="products" value="3구 선물세트" id="set2">
+                    <div class="product-checkbox"></div>
+                    <div class="product-info">
+                        <p class="product-name">3구 선물세트</p>
+                        <p class="product-price">24,000원</p>
+                    </div>
+                    <div class="product-qty">
+                        <button type="button" class="qty-btn" onclick="event.stopPropagation(); changeQty('set2', -1)">-</button>
+                        <span class="qty-value" id="qty-set2">1</span>
+                        <button type="button" class="qty-btn" onclick="event.stopPropagation(); changeQty('set2', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="product-option" onclick="toggleProduct(this, 'set3')">
+                    <input type="checkbox" name="products" value="4구 인절미세트" id="set3">
+                    <div class="product-checkbox"></div>
+                    <div class="product-info">
+                        <p class="product-name">4구 인절미세트</p>
+                        <p class="product-price">29,000원</p>
+                    </div>
+                    <div class="product-qty">
+                        <button type="button" class="qty-btn" onclick="event.stopPropagation(); changeQty('set3', -1)">-</button>
+                        <span class="qty-value" id="qty-set3">1</span>
+                        <button type="button" class="qty-btn" onclick="event.stopPropagation(); changeQty('set3', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="product-option" onclick="toggleProduct(this, 'set4')">
+                    <input type="checkbox" name="products" value="6구 종합세트" id="set4">
+                    <div class="product-checkbox"></div>
+                    <div class="product-info">
+                        <p class="product-name">6구 종합세트 <span style="color: var(--gold); font-size: 11px;">BEST</span></p>
+                        <p class="product-price">49,000원</p>
+                    </div>
+                    <div class="product-qty">
+                        <button type="button" class="qty-btn" onclick="event.stopPropagation(); changeQty('set4', -1)">-</button>
+                        <span class="qty-value" id="qty-set4">1</span>
+                        <button type="button" class="qty-btn" onclick="event.stopPropagation(); changeQty('set4', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="product-option" onclick="toggleProduct(this, 'set5')">
+                    <input type="checkbox" name="products" value="찹쌀떡세트" id="set5">
+                    <div class="product-checkbox"></div>
+                    <div class="product-info">
+                        <p class="product-name">찹쌀떡세트</p>
+                        <p class="product-price">50,000원</p>
+                    </div>
+                    <div class="product-qty">
+                        <button type="button" class="qty-btn" onclick="event.stopPropagation(); changeQty('set5', -1)">-</button>
+                        <span class="qty-value" id="qty-set5">1</span>
+                        <button type="button" class="qty-btn" onclick="event.stopPropagation(); changeQty('set5', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="product-option" onclick="toggleProduct(this, 'set6')">
+                    <input type="checkbox" name="products" value="고급한지세트" id="set6">
+                    <div class="product-checkbox"></div>
+                    <div class="product-info">
+                        <p class="product-name">고급한지세트 <span style="color: #8B4513; font-size: 11px;">PREMIUM</span></p>
+                        <p class="product-price">80,000원</p>
+                    </div>
+                    <div class="product-qty">
+                        <button type="button" class="qty-btn" onclick="event.stopPropagation(); changeQty('set6', -1)">-</button>
+                        <span class="qty-value" id="qty-set6">1</span>
+                        <button type="button" class="qty-btn" onclick="event.stopPropagation(); changeQty('set6', 1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 수령 방법 -->
+            <div class="form-group">
+                <label class="form-label">수령 방법<span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="delivery" id="delivery-shipping" value="택배" checked>
+                        <label for="delivery-shipping">택배 배송</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="delivery" id="delivery-pickup" value="픽업">
+                        <label for="delivery-pickup">매장 픽업</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 요청사항 -->
+            <div class="form-group">
+                <label class="form-label" for="message">요청사항</label>
+                <textarea id="message" class="form-textarea" placeholder="배송 희망일, 수량, 기타 문의사항 등을 적어주세요"></textarea>
+            </div>
+
+            <!-- 안내사항 -->
+            <div class="notice">
+                <p class="notice-title">📌 안내사항</p>
+                <p class="notice-text">
+                    • 신청 접수 후 영업시간 내 연락드립니다<br>
+                    • 영업시간: 월-금 08:00-21:30<br>
+                    • 설 연휴 3일 전 주문 마감<br>
+                    • 결제는 연락 후 안내드립니다
+                </p>
+            </div>
+        </form>
+
+        <!-- Submit Button -->
+        <div class="submit-section">
+            <button type="submit" form="orderForm" class="submit-btn">신청하기</button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal">
+            <div class="modal-icon">✓</div>
+            <h3 class="modal-title">신청이 완료되었습니다</h3>
+            <p class="modal-text">
+                입력하신 연락처로<br>
+                빠른 시간 내에 연락드리겠습니다.
+            </p>
+            <button class="modal-btn" onclick="location.href='index.html'">확인</button>
+        </div>
+    </div>
+
+    <script>
+        // Toggle product selection
+        function toggleProduct(element, id) {
+            const checkbox = document.getElementById(id);
+            checkbox.checked = !checkbox.checked;
+            element.classList.toggle('selected', checkbox.checked);
+        }
+
+        // Change quantity
+        function changeQty(id, delta) {
+            const qtyEl = document.getElementById('qty-' + id);
+            let qty = parseInt(qtyEl.textContent);
+            qty = Math.max(1, qty + delta);
+            qtyEl.textContent = qty;
+        }
+
+        // Format phone number
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 3 && value.length <= 7) {
+                value = value.slice(0, 3) + '-' + value.slice(3);
+            } else if (value.length > 7) {
+                value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+            }
+            e.target.value = value;
+        });
+
+        // Form submit
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = {
+                type: document.querySelector('input[name="type"]:checked').value,
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                products: [],
+                delivery: document.querySelector('input[name="delivery"]:checked').value,
+                message: document.getElementById('message').value
+            };
+
+            // Get selected products with quantities
+            document.querySelectorAll('.product-option.selected').forEach(el => {
+                const name = el.querySelector('.product-name').textContent;
+                const qty = el.querySelector('.qty-value').textContent;
+                formData.products.push({ name, qty });
+            });
+
+            console.log('Form submitted:', formData);
+
+            // Show success modal
+            document.getElementById('successModal').classList.add('show');
+        });
+    </script>
+</body>
+</html>
