@@ -328,6 +328,29 @@
             bottom: 0;
         }
 
+        /* Total Amount */
+        .total-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding: 16px;
+            background: var(--beige);
+            border-radius: 12px;
+        }
+
+        .total-label {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--brown-main);
+        }
+
+        .total-amount {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
         .submit-btn {
             width: 100%;
             padding: 18px 24px;
@@ -615,6 +638,10 @@
 
         <!-- Submit Button -->
         <div class="submit-section">
+            <div class="total-section">
+                <span class="total-label">예상 주문액</span>
+                <span class="total-amount" id="totalAmount">0원</span>
+            </div>
             <button type="submit" form="orderForm" class="submit-btn">신청하기</button>
         </div>
     </div>
@@ -637,13 +664,37 @@
         // Google Sheets API URL (Apps Script 배포 URL)
         // ============================================
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx_zzbn9uqv9FGlDt3u99ZX06Ij82A2DOGEaj2JVntB2LuD0ODrMeD0lctkr5opCFxs/exec';
-        // 위 URL을 Google Apps Script 배포 URL로 변경하세요
+
+        // 상품 가격 데이터
+        const PRODUCT_PRICES = {
+            'set1': 19000,  // 2구 선물세트
+            'set2': 24000,  // 3구 선물세트
+            'set3': 29000,  // 4구 인절미세트
+            'set4': 49000,  // 6구 종합세트
+            'set5': 50000,  // 찹쌀떡세트
+            'set6': 80000   // 고급한지세트
+        };
+
+        // 총액 계산
+        function calculateTotal() {
+            let total = 0;
+            document.querySelectorAll('.product-option.selected').forEach(el => {
+                const checkbox = el.querySelector('input[type="checkbox"]');
+                const id = checkbox.id;
+                const qty = parseInt(document.getElementById('qty-' + id).textContent);
+                const price = PRODUCT_PRICES[id] || 0;
+                total += price * qty;
+            });
+            document.getElementById('totalAmount').textContent = total.toLocaleString() + '원';
+            return total;
+        }
 
         // Toggle product selection
         function toggleProduct(element, id) {
             const checkbox = document.getElementById(id);
             checkbox.checked = !checkbox.checked;
             element.classList.toggle('selected', checkbox.checked);
+            calculateTotal();
         }
 
         // Change quantity
@@ -652,6 +703,7 @@
             let qty = parseInt(qtyEl.textContent);
             qty = Math.max(1, qty + delta);
             qtyEl.textContent = qty;
+            calculateTotal();
         }
 
         // Format phone number
@@ -673,13 +725,15 @@
             const originalText = submitBtn.textContent;
 
             // Collect form data
+            const totalAmount = calculateTotal();
             const formData = {
                 type: document.querySelector('input[name="type"]:checked').value,
                 name: document.getElementById('name').value,
                 phone: document.getElementById('phone').value,
                 products: [],
                 delivery: document.querySelector('input[name="delivery"]:checked').value,
-                message: document.getElementById('message').value
+                message: document.getElementById('message').value,
+                totalAmount: totalAmount
             };
 
             // Get selected products with quantities
