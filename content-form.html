@@ -293,41 +293,121 @@
         </div>
     </div>
 
-    <!-- 4. 배송 안내 -->
-    <h2>4. 배송 안내</h2>
+    <!-- 4. 배송/수령 안내 -->
+    <h2>4. 배송/수령 안내 (방법별)</h2>
+
     <div class="section">
-        <div class="row">
-            <div class="label required">배송비</div>
-            <div class="field">
-                <input type="text" placeholder="예: 무료 / 3,000원 / 5만원 이상 무료">
+        <div class="product-card">
+            <h3>A. 택배 배송</h3>
+            <div class="row">
+                <div class="label required">택배 가능 여부</div>
+                <div class="field"><input type="text" placeholder="가능 / 불가"></div>
+            </div>
+            <div class="row">
+                <div class="label">택배사</div>
+                <div class="field"><input type="text" placeholder="예: CJ대한통운, 로젠택배"></div>
+            </div>
+            <div class="row">
+                <div class="label required">배송비</div>
+                <div class="field">
+                    <input type="text" placeholder="예: 3,000원 / 5만원 이상 무료 / 무료">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">배송 가능 지역</div>
+                <div class="field">
+                    <input type="text" placeholder="예: 전국 / 제주 추가비용 / 도서산간 불가">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">배송 소요일</div>
+                <div class="field">
+                    <input type="text" placeholder="예: 주문 확정 후 2~3일">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">포장 방법</div>
+                <div class="field">
+                    <textarea placeholder="예: 아이스팩 + 보냉박스, 선물포장 기본 포함"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">택배 주의사항</div>
+                <div class="field">
+                    <textarea placeholder="예: 수령 즉시 냉장 보관, 부재 시 경비실 보관 요청 등"></textarea>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="label">배송 가능 지역</div>
-            <div class="field">
-                <input type="text" placeholder="예: 전국 / 수도권만 / 제주 추가비용">
+
+        <div class="product-card">
+            <h3>B. 퀵 배송</h3>
+            <div class="row">
+                <div class="label required">퀵 가능 여부</div>
+                <div class="field"><input type="text" placeholder="가능 / 불가"></div>
+            </div>
+            <div class="row">
+                <div class="label">퀵 배송비</div>
+                <div class="field">
+                    <input type="text" placeholder="예: 실비(거리별 상이) / 별도 안내">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">퀵 가능 지역</div>
+                <div class="field">
+                    <input type="text" placeholder="예: 서울/경기 / 여의도 인근만">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">퀵 소요시간</div>
+                <div class="field">
+                    <input type="text" placeholder="예: 접수 후 1~2시간">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">퀵 이용 안내</div>
+                <div class="field">
+                    <textarea placeholder="예: 오후 3시 이전 주문 시 당일 배송, 퀵비 착불/선불 등"></textarea>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="label">배송 소요일</div>
-            <div class="field">
-                <input type="text" placeholder="예: 주문 후 2~3일 이내">
+
+        <div class="product-card">
+            <h3>C. 매장 픽업 (포장)</h3>
+            <div class="row">
+                <div class="label required">픽업 가능 여부</div>
+                <div class="field"><input type="text" placeholder="가능 / 불가"></div>
+            </div>
+            <div class="row">
+                <div class="label">픽업 가능 시간</div>
+                <div class="field">
+                    <input type="text" placeholder="예: 영업시간 내 아무때나 / 오전 중 수령 권장">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">사전 예약 필요</div>
+                <div class="field">
+                    <input type="text" placeholder="예: 전일 오후까지 연락 / 당일 가능">
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">픽업 장소 안내</div>
+                <div class="field">
+                    <textarea placeholder="예: IFC몰 B1 매장, 주차 시 OO주차장 이용"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">포장 안내</div>
+                <div class="field">
+                    <textarea placeholder="예: 선물포장 기본 / 보냉백 무료 제공 / 손잡이 쇼핑백 포함"></textarea>
+                </div>
             </div>
         </div>
+
+        <hr class="divider">
         <div class="row">
-            <div class="label">택배사</div>
-            <div class="field"><input type="text" placeholder="예: CJ대한통운"></div>
-        </div>
-        <div class="row">
-            <div class="label">매장 픽업 안내</div>
+            <div class="label">공통 포장 안내</div>
             <div class="field">
-                <textarea placeholder="예: 매장 방문 수령 가능, 수령 전 전화 확인 필요"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="label">포장 방법</div>
-            <div class="field">
-                <textarea placeholder="예: 아이스팩 포함 보냉포장 / 선물용 포장지"></textarea>
+                <textarea placeholder="예: 전 상품 선물포장 기본, 보자기 포장 추가 5,000원 등"></textarea>
             </div>
         </div>
     </div>
