@@ -485,20 +485,8 @@
 
         <!-- Form -->
         <form id="orderForm" class="form-section">
-            <!-- 신청 유형 -->
-            <div class="form-group">
-                <label class="form-label">신청 유형<span class="required">*</span></label>
-                <div class="radio-group">
-                    <div class="radio-option">
-                        <input type="radio" name="type" id="type-order" value="주문" checked>
-                        <label for="type-order">주문 신청</label>
-                    </div>
-                    <div class="radio-option">
-                        <input type="radio" name="type" id="type-consult" value="상담">
-                        <label for="type-consult">상담 신청</label>
-                    </div>
-                </div>
-            </div>
+            <!-- 신청 유형 (hidden - 주문/상담 통합) -->
+            <input type="hidden" name="type" value="주문/상담">
 
             <!-- 이름 -->
             <div class="form-group">
@@ -727,7 +715,7 @@
             // Collect form data
             const totalAmount = calculateTotal();
             const formData = {
-                type: document.querySelector('input[name="type"]:checked').value,
+                type: document.querySelector('input[name="type"]').value,
                 name: document.getElementById('name').value,
                 phone: document.getElementById('phone').value,
                 products: [],
