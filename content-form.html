@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈페이지 콘텐츠 수집 양식 - 원조공주떡집 IFC몰점</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Malgun Gothic', sans-serif; background: #f5f5f5; color: #333; line-height: 1.8; }
+        .container { max-width: 800px; margin: 0 auto; padding: 24px; }
+        h1 { font-size: 22px; text-align: center; padding: 24px; background: #2A1810; color: #fff; margin: -24px -24px 32px; }
+        h1 small { display: block; font-size: 13px; color: #D4AF37; margin-top: 4px; font-weight: 400; }
+        h2 { font-size: 17px; color: #2A1810; border-left: 4px solid #D4AF37; padding-left: 12px; margin: 32px 0 16px; }
+        .section { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .row { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+        .row .label { min-width: 120px; font-size: 13px; font-weight: 600; color: #555; padding-top: 8px; flex-shrink: 0; }
+        .row .field { flex: 1; }
+        .row .field input, .row .field textarea, .row .field select {
+            width: 100%; padding: 10px 14px; border: 1px solid #ddd; border-radius: 8px;
+            font-size: 14px; font-family: inherit; background: #fafafa;
+        }
+        .row .field textarea { min-height: 80px; resize: vertical; }
+        .row .field input:focus, .row .field textarea:focus { outline: none; border-color: #D4AF37; background: #fff; }
+        .hint { font-size: 11px; color: #999; margin-top: 4px; }
+        .required::after { content: ' *'; color: #DC3545; }
+        .product-card { background: #fafafa; border: 1px solid #eee; border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+        .product-card h3 { font-size: 14px; color: #D4AF37; margin-bottom: 12px; }
+        .divider { border: none; border-top: 1px dashed #ddd; margin: 16px 0; }
+        .btn-add { display: inline-block; padding: 10px 20px; background: #f0f0f0; border: 1px dashed #ccc; border-radius: 8px; cursor: pointer; font-size: 13px; color: #666; }
+        .btn-add:hover { background: #e8e8e8; }
+        .btn-print { display: block; width: 100%; padding: 16px; background: #D4AF37; color: #2A1810; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 24px; }
+        .btn-print:hover { background: #C9A432; }
+        .checklist { list-style: none; }
+        .checklist li { padding: 6px 0; font-size: 14px; }
+        .checklist li::before { content: '[ ] '; font-family: monospace; color: #999; }
+        .note { background: #FFF8E7; border: 1px solid #F0E0B0; border-radius: 8px; padding: 16px; margin: 16px 0; font-size: 13px; }
+        .note strong { color: #8B6914; }
+        @media print {
+            body { background: #fff; }
+            .container { max-width: 100%; }
+            .btn-print { display: none; }
+            .section { box-shadow: none; border: 1px solid #eee; break-inside: avoid; }
+            .row .field input, .row .field textarea { border-color: #ccc; background: #fff; min-height: 30px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>홈페이지 콘텐츠 수집 양식<small>작성 후 전달해 주시면 홈페이지에 반영합니다</small></h1>
+
+    <!-- 1. 매장 기본 정보 -->
+    <h2>1. 매장 기본 정보</h2>
+    <div class="section">
+        <div class="row">
+            <div class="label required">상호명</div>
+            <div class="field"><input type="text" value="원조공주떡집 IFC몰점"></div>
+        </div>
+        <div class="row">
+            <div class="label required">대표 전화번호</div>
+            <div class="field">
+                <input type="text" placeholder="02-6137-5979">
+                <p class="hint">고객이 전화할 번호</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">카카오톡 ID</div>
+            <div class="field"><input type="text" placeholder="카톡 상담 연결용 (있으면)"></div>
+        </div>
+        <div class="row">
+            <div class="label required">매장 주소</div>
+            <div class="field"><input type="text" placeholder="서울특별시 영등포구 국제금융로 10 IFC몰 B1"></div>
+        </div>
+        <div class="row">
+            <div class="label required">영업시간</div>
+            <div class="field">
+                <input type="text" placeholder="예: 월~금 08:00-21:30 / 토 10:00-20:00">
+                <p class="hint">요일별로 다르면 각각 적어주세요</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">휴무일</div>
+            <div class="field"><input type="text" placeholder="예: 일요일, 공휴일"></div>
+        </div>
+    </div>
+
+    <!-- 2. 설 특별 안내 -->
+    <h2>2. 설 시즌 안내</h2>
+    <div class="section">
+        <div class="row">
+            <div class="label required">주문 마감일</div>
+            <div class="field">
+                <input type="text" placeholder="예: 2026년 1월 25일 (토)">
+                <p class="hint">이 날짜 이후 주문 불가</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label required">설 연휴 휴무</div>
+            <div class="field">
+                <input type="text" placeholder="예: 1월 28일(화) ~ 1월 30일(목)">
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">설 시즌 가격 변동</div>
+            <div class="field">
+                <textarea placeholder="예: 설 시즌 가격 동일 / 또는 변경 사항 기재"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">특별 프로모션</div>
+            <div class="field">
+                <textarea placeholder="예: 10세트 이상 주문 시 5% 할인, 조기주문 혜택 등"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. 상품 정보 -->
+    <h2>3. 상품 정보 (세트별 작성)</h2>
+    <div class="note">
+        <strong>안내:</strong> 현재 등록된 상품 6종 기준입니다. 추가/삭제/변경 있으면 표시해주세요.
+    </div>
+
+    <div class="section">
+        <!-- 상품 1 -->
+        <div class="product-card">
+            <h3>상품 1</h3>
+            <div class="row">
+                <div class="label required">상품명</div>
+                <div class="field"><input type="text" value="2구 선물세트"></div>
+            </div>
+            <div class="row">
+                <div class="label required">판매가</div>
+                <div class="field"><input type="text" value="19,000원"></div>
+            </div>
+            <div class="row">
+                <div class="label required">구성</div>
+                <div class="field">
+                    <textarea placeholder="예: 꿀떡 1개 + 송편 1개&#10;각 떡 이름과 개수를 적어주세요"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="label">상품 설명</div>
+                <div class="field"><textarea placeholder="홈페이지 상품 소개에 들어갈 문구"></textarea></div>
+            </div>
+            <div class="row">
+                <div class="label">상품 이미지</div>
+                <div class="field">
+                    <input type="text" placeholder="파일명 또는 별도 전달">
+                    <p class="hint">고해상도 사진 (최소 800x600px 권장)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 상품 2 -->
+        <div class="product-card">
+            <h3>상품 2</h3>
+            <div class="row">
+                <div class="label required">상품명</div>
+                <div class="field"><input type="text" value="3구 선물세트"></div>
+            </div>
+            <div class="row">
+                <div class="label required">판매가</div>
+                <div class="field"><input type="text" value="24,000원"></div>
+            </div>
+            <div class="row">
+                <div class="label required">구성</div>
+                <div class="field"><textarea placeholder="각 떡 이름과 개수"></textarea></div>
+            </div>
+            <div class="row">
+                <div class="label">상품 설명</div>
+                <div class="field"><textarea placeholder="홈페이지 상품 소개 문구"></textarea></div>
+            </div>
+            <div class="row">
+                <div class="label">상품 이미지</div>
+                <div class="field"><input type="text" placeholder="파일명 또는 별도 전달"></div>
+            </div>
+        </div>
+
+        <!-- 상품 3 -->
+        <div class="product-card">
+            <h3>상품 3</h3>
+            <div class="row">
+                <div class="label required">상품명</div>
+                <div class="field"><input type="text" value="4구 인절미세트"></div>
+            </div>
+            <div class="row">
+                <div class="label required">판매가</div>
+                <div class="field"><input type="text" value="29,000원"></div>
+            </div>
+            <div class="row">
+                <div class="label required">구성</div>
+                <div class="field"><textarea placeholder="각 떡 이름과 개수"></textarea></div>
+            </div>
+            <div class="row">
+                <div class="label">상품 설명</div>
+                <div class="field"><textarea placeholder="홈페이지 상품 소개 문구"></textarea></div>
+            </div>
+            <div class="row">
+                <div class="label">상품 이미지</div>
+                <div class="field"><input type="text" placeholder="파일명 또는 별도 전달"></div>
+            </div>
+        </div>
+
+        <!-- 상품 4 -->
+        <div class="product-card">
+            <h3>상품 4 (BEST)</h3>
+            <div class="row">
+                <div class="label required">상품명</div>
+                <div class="field"><input type="text" value="6구 종합세트"></div>
+            </div>
+            <div class="row">
+                <div class="label required">판매가</div>
+                <div class="field"><input type="text" value="49,000원"></div>
+            </div>
+            <div class="row">
+                <div class="label required">구성</div>
+                <div class="field"><textarea placeholder="각 떡 이름과 개수"></textarea></div>
+            </div>
+            <div class="row">
+                <div class="label">상품 설명</div>
+                <div class="field"><textarea placeholder="홈페이지 상품 소개 문구"></textarea></div>
+            </div>
+            <div class="row">
+                <div class="label">상품 이미지</div>
+                <div class="field"><input type="text" placeholder="파일명 또는 별도 전달"></div>
+            </div>
+        </div>
+
+        <!-- 상품 5 -->
+        <div class="product-card">
+            <h3>상품 5</h3>
+            <div class="row">
+                <div class="label required">상품명</div>
+                <div class="field"><input type="text" value="찹쌀떡세트"></div>
+            </div>
+            <div class="row">
+                <div class="label required">판매가</div>
+                <div class="field"><input type="text" value="50,000원"></div>
+            </div>
+            <div class="row">
+                <div class="label required">구성</div>
+                <div class="field"><textarea placeholder="각 떡 이름과 개수"></textarea></div>
+            </div>
+            <div class="row">
+                <div class="label">상품 설명</div>
+                <div class="field"><textarea placeholder="홈페이지 상품 소개 문구"></textarea></div>
+            </div>
+            <div class="row">
+                <div class="label">상품 이미지</div>
+                <div class="field"><input type="text" placeholder="파일명 또는 별도 전달"></div>
+            </div>
+        </div>
+
+        <!-- 상품 6 -->
+        <div class="product-card">
+            <h3>상품 6 (PREMIUM)</h3>
+            <div class="row">
+                <div class="label required">상품명</div>
+                <div class="field"><input type="text" value="고급한지세트"></div>
+            </div>
+            <div class="row">
+                <div class="label required">판매가</div>
+                <div class="field"><input type="text" value="80,000원"></div>
+            </div>
+            <div class="row">
+                <div class="label required">구성</div>
+                <div class="field"><textarea placeholder="각 떡 이름과 개수"></textarea></div>
+            </div>
+            <div class="row">
+                <div class="label">상품 설명</div>
+                <div class="field"><textarea placeholder="홈페이지 상품 소개 문구"></textarea></div>
+            </div>
+            <div class="row">
+                <div class="label">상품 이미지</div>
+                <div class="field"><input type="text" placeholder="파일명 또는 별도 전달"></div>
+            </div>
+        </div>
+
+        <!-- 추가 상품 -->
+        <div class="product-card" style="border-style: dashed;">
+            <h3>추가 상품 (있으면 작성)</h3>
+            <div class="row">
+                <div class="label">상품명</div>
+                <div class="field"><input type="text" placeholder="새로 추가할 상품"></div>
+            </div>
+            <div class="row">
+                <div class="label">판매가</div>
+                <div class="field"><input type="text" placeholder="원"></div>
+            </div>
+            <div class="row">
+                <div class="label">구성</div>
+                <div class="field"><textarea placeholder="각 떡 이름과 개수"></textarea></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. 배송 안내 -->
+    <h2>4. 배송 안내</h2>
+    <div class="section">
+        <div class="row">
+            <div class="label required">배송비</div>
+            <div class="field">
+                <input type="text" placeholder="예: 무료 / 3,000원 / 5만원 이상 무료">
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">배송 가능 지역</div>
+            <div class="field">
+                <input type="text" placeholder="예: 전국 / 수도권만 / 제주 추가비용">
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">배송 소요일</div>
+            <div class="field">
+                <input type="text" placeholder="예: 주문 후 2~3일 이내">
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">택배사</div>
+            <div class="field"><input type="text" placeholder="예: CJ대한통운"></div>
+        </div>
+        <div class="row">
+            <div class="label">매장 픽업 안내</div>
+            <div class="field">
+                <textarea placeholder="예: 매장 방문 수령 가능, 수령 전 전화 확인 필요"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">포장 방법</div>
+            <div class="field">
+                <textarea placeholder="예: 아이스팩 포함 보냉포장 / 선물용 포장지"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. 결제 안내 -->
+    <h2>5. 결제 안내</h2>
+    <div class="section">
+        <div class="row">
+            <div class="label required">결제 방법</div>
+            <div class="field">
+                <textarea placeholder="예: 무통장입금 / 카드결제(매장) / 계좌이체 등"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">입금 계좌</div>
+            <div class="field">
+                <input type="text" placeholder="예: 국민은행 123-456-789012 (예금주: 홍길동)">
+                <p class="hint">무통장입금 시 안내할 계좌</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">사업자등록번호</div>
+            <div class="field"><input type="text" placeholder="세금계산서 발행 필요 시"></div>
+        </div>
+    </div>
+
+    <!-- 6. 교환/환불 -->
+    <h2>6. 교환/환불 정책</h2>
+    <div class="section">
+        <div class="row">
+            <div class="label">교환/환불 안내</div>
+            <div class="field">
+                <textarea placeholder="예: 수령 후 당일 이내 연락 시 교환 가능&#10;식품 특성상 단순 변심 환불 불가 등"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">유통기한</div>
+            <div class="field">
+                <input type="text" placeholder="예: 제조일로부터 7일 (냉장 보관)">
+            </div>
+        </div>
+        <div class="row">
+            <div class="label">보관 방법</div>
+            <div class="field">
+                <input type="text" placeholder="예: 냉장 보관 / 실온 보관">
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. 추가 요청 -->
+    <h2>7. 기타</h2>
+    <div class="section">
+        <div class="row">
+            <div class="label">추가 요청사항</div>
+            <div class="field">
+                <textarea style="min-height: 120px;" placeholder="홈페이지에 넣고 싶은 문구, 수정 요청, 기타 사항을 자유롭게 적어주세요"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- 체크리스트 -->
+    <h2>제출 전 체크리스트</h2>
+    <div class="section">
+        <ul class="checklist">
+            <li>상품 가격이 정확한지 확인했다</li>
+            <li>상품 구성(떡 종류/개수)을 적었다</li>
+            <li>상품 사진을 별도 전달했다 (또는 예정)</li>
+            <li>배송비와 배송 안내를 확인했다</li>
+            <li>주문 마감일을 확인했다</li>
+            <li>결제 계좌 정보를 확인했다</li>
+        </ul>
+    </div>
+
+    <button class="btn-print" onclick="window.print()">인쇄하기 / PDF 저장</button>
+</div>
+</body>
+</html>
