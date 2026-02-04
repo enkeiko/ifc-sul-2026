@@ -28,8 +28,21 @@
         .divider { border: none; border-top: 1px dashed #ddd; margin: 16px 0; }
         .btn-add { display: inline-block; padding: 10px 20px; background: #f0f0f0; border: 1px dashed #ccc; border-radius: 8px; cursor: pointer; font-size: 13px; color: #666; }
         .btn-add:hover { background: #e8e8e8; }
-        .btn-print { display: block; width: 100%; padding: 16px; background: #D4AF37; color: #2A1810; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 24px; }
-        .btn-print:hover { background: #C9A432; }
+        .product-card { position: relative; }
+        .btn-delete { position: absolute; top: 12px; right: 12px; width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 6px; background: #fff; color: #999; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; line-height: 1; }
+        .btn-delete:hover { background: #DC3545; color: #fff; border-color: #DC3545; }
+        .btn-print { display: inline-block; width: 48%; padding: 16px; background: #f0f0f0; color: #333; border: 1px solid #ddd; border-radius: 12px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 24px; text-align: center; }
+        .btn-print:hover { background: #e8e8e8; }
+        .btn-submit { display: inline-block; width: 48%; padding: 16px; background: #D4AF37; color: #2A1810; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 24px; text-align: center; }
+        .btn-submit:hover { background: #C9A432; }
+        .btn-submit:disabled { background: #ccc; color: #999; cursor: not-allowed; }
+        .btn-row { display: flex; gap: 4%; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal-overlay.show { display: flex; }
+        .modal { background: #fff; border-radius: 16px; padding: 40px; text-align: center; max-width: 360px; width: 90%; }
+        .modal-icon { font-size: 48px; color: #4CAF50; margin-bottom: 12px; }
+        .modal h3 { margin-bottom: 8px; }
+        .modal p { color: #666; font-size: 14px; }
         .checklist { list-style: none; }
         .checklist li { padding: 6px 0; font-size: 14px; }
         .checklist li::before { content: '[ ] '; font-family: monospace; color: #999; }
@@ -127,9 +140,10 @@
         <strong>상품 이미지:</strong> 사진은 이 양식과 별도로 카톡/이메일로 전달해주세요. (최소 800x600px 권장)
     </div>
 
-    <div class="section">
+    <div class="section" id="product-section">
         <!-- 상품 1 -->
         <div class="product-card">
+            <button type="button" class="btn-delete" onclick="deleteProduct(this)" title="삭제">X</button>
             <h3>상품 1</h3>
             <div class="row">
                 <div class="label required">상품명</div>
@@ -153,6 +167,7 @@
 
         <!-- 상품 2 -->
         <div class="product-card">
+            <button type="button" class="btn-delete" onclick="deleteProduct(this)" title="삭제">X</button>
             <h3>상품 2</h3>
             <div class="row">
                 <div class="label required">상품명</div>
@@ -174,6 +189,7 @@
 
         <!-- 상품 3 -->
         <div class="product-card">
+            <button type="button" class="btn-delete" onclick="deleteProduct(this)" title="삭제">X</button>
             <h3>상품 3</h3>
             <div class="row">
                 <div class="label required">상품명</div>
@@ -195,6 +211,7 @@
 
         <!-- 상품 4 -->
         <div class="product-card">
+            <button type="button" class="btn-delete" onclick="deleteProduct(this)" title="삭제">X</button>
             <h3>상품 4 (BEST)</h3>
             <div class="row">
                 <div class="label required">상품명</div>
@@ -216,6 +233,7 @@
 
         <!-- 상품 5 -->
         <div class="product-card">
+            <button type="button" class="btn-delete" onclick="deleteProduct(this)" title="삭제">X</button>
             <h3>상품 5</h3>
             <div class="row">
                 <div class="label required">상품명</div>
@@ -237,6 +255,7 @@
 
         <!-- 상품 6 -->
         <div class="product-card">
+            <button type="button" class="btn-delete" onclick="deleteProduct(this)" title="삭제">X</button>
             <h3>상품 6 (PREMIUM)</h3>
             <div class="row">
                 <div class="label required">상품명</div>
@@ -256,22 +275,7 @@
             </div>
         </div>
 
-        <!-- 추가 상품 -->
-        <div class="product-card" style="border-style: dashed;">
-            <h3>추가 상품 (있으면 작성)</h3>
-            <div class="row">
-                <div class="label">상품명</div>
-                <div class="field"><input type="text" placeholder="새로 추가할 상품"></div>
-            </div>
-            <div class="row">
-                <div class="label">판매가</div>
-                <div class="field"><input type="text" placeholder="원"></div>
-            </div>
-            <div class="row">
-                <div class="label">구성</div>
-                <div class="field"><textarea placeholder="각 떡 이름과 개수"></textarea></div>
-            </div>
-        </div>
+        <button type="button" class="btn-add" onclick="addProduct()" style="width: 100%; text-align: center; padding: 14px;">+ 상품 추가</button>
     </div>
 
     <!-- 4. 배송/수령 안내 -->
@@ -462,7 +466,171 @@
         </ul>
     </div>
 
-    <button class="btn-print" onclick="window.print()">인쇄하기 / PDF 저장</button>
+    <div class="btn-row">
+        <button class="btn-print" onclick="window.print()">인쇄 / PDF</button>
+        <button class="btn-submit" id="submitBtn" onclick="submitForm()">제출하기</button>
+    </div>
 </div>
+
+<!-- Success Modal -->
+<div class="modal-overlay" id="successModal">
+    <div class="modal">
+        <div class="modal-icon">V</div>
+        <h3>제출 완료</h3>
+        <p>콘텐츠 양식이 전송되었습니다.<br>확인 후 홈페이지에 반영하겠습니다.</p>
+    </div>
+</div>
+
+<!-- Hidden iframe for form submit -->
+<iframe name="hidden_iframe_content" id="hidden_iframe_content" style="display:none;"></iframe>
+<script>
+var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx_zzbn9uqv9FGlDt3u99ZX06Ij82A2DOGEaj2JVntB2LuD0ODrMeD0lctkr5opCFxs/exec';
+
+function collectFormData() {
+    var data = {};
+
+    // 1. 매장 기본 정보
+    var h2s = document.querySelectorAll('h2');
+    h2s.forEach(function(h2) {
+        var title = h2.textContent.trim();
+        var next = h2.nextElementSibling;
+        while (next && !next.classList.contains('section')) {
+            next = next.nextElementSibling;
+        }
+        if (!next) return;
+
+        // 상품 섹션 (동적 카드)
+        if (next.id === 'product-section') {
+            var products = [];
+            next.querySelectorAll('.product-card').forEach(function(card) {
+                var p = {};
+                p.title = card.querySelector('h3').textContent;
+                card.querySelectorAll('.row').forEach(function(row) {
+                    var label = row.querySelector('.label');
+                    if (!label) return;
+                    var key = label.textContent.replace(' *', '').trim();
+                    var input = row.querySelector('input, textarea');
+                    if (input) p[key] = input.value;
+                });
+                products.push(p);
+            });
+            data[title] = products;
+        }
+        // 배송 섹션 (그룹 카드)
+        else if (next.querySelectorAll('.product-card').length > 0) {
+            var section = {};
+            next.querySelectorAll('.product-card').forEach(function(card) {
+                var groupTitle = card.querySelector('h3').textContent;
+                var group = {};
+                card.querySelectorAll('.row').forEach(function(row) {
+                    var label = row.querySelector('.label');
+                    if (!label) return;
+                    var key = label.textContent.replace(' *', '').trim();
+                    var input = row.querySelector('input, textarea');
+                    if (input) group[key] = input.value;
+                });
+                section[groupTitle] = group;
+            });
+            // 카드 밖 rows (공통 포장 안내 등)
+            var directRows = next.querySelectorAll(':scope > .row');
+            directRows.forEach(function(row) {
+                var label = row.querySelector('.label');
+                if (!label) return;
+                var key = label.textContent.replace(' *', '').trim();
+                var input = row.querySelector('input, textarea');
+                if (input) section[key] = input.value;
+            });
+            data[title] = section;
+        }
+        // 일반 섹션
+        else {
+            var flat = {};
+            next.querySelectorAll('.row').forEach(function(row) {
+                var label = row.querySelector('.label');
+                if (!label) return;
+                var key = label.textContent.replace(' *', '').trim();
+                var input = row.querySelector('input, textarea');
+                if (input) flat[key] = input.value;
+            });
+            data[title] = flat;
+        }
+    });
+
+    return data;
+}
+
+function submitForm() {
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '전송 중...';
+
+    var formData = collectFormData();
+    formData.formType = 'content';
+
+    var form = document.createElement('form');
+    form.method = 'POST';
+    form.action = GOOGLE_SCRIPT_URL;
+    form.target = 'hidden_iframe_content';
+
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'data';
+    input.value = JSON.stringify(formData);
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+
+    setTimeout(function() {
+        btn.disabled = false;
+        btn.textContent = '제출하기';
+        document.getElementById('successModal').classList.add('show');
+        setTimeout(function() {
+            document.getElementById('successModal').classList.remove('show');
+        }, 3000);
+    }, 2000);
+}
+
+function renumberProducts() {
+    var cards = document.querySelectorAll('#product-section .product-card');
+    cards.forEach(function(card, i) {
+        card.querySelector('h3').textContent = '상품 ' + (i + 1);
+    });
+}
+
+function deleteProduct(btn) {
+    var card = btn.closest('.product-card');
+    var section = document.getElementById('product-section');
+    var cards = section.querySelectorAll('.product-card');
+    if (cards.length <= 1) {
+        alert('상품은 최소 1개 이상 있어야 합니다.');
+        return;
+    }
+    if (confirm('이 상품을 삭제하시겠습니까?')) {
+        card.remove();
+        renumberProducts();
+    }
+}
+
+function addProduct() {
+    var section = document.getElementById('product-section');
+    var cards = section.querySelectorAll('.product-card');
+    var num = cards.length + 1;
+
+    var card = document.createElement('div');
+    card.className = 'product-card';
+    card.innerHTML =
+        '<button type="button" class="btn-delete" onclick="deleteProduct(this)" title="삭제">X</button>' +
+        '<h3>상품 ' + num + '</h3>' +
+        '<div class="row"><div class="label required">상품명</div><div class="field"><input type="text" placeholder="상품명 입력"></div></div>' +
+        '<div class="row"><div class="label required">판매가</div><div class="field"><input type="text" placeholder="예: 30,000원"></div></div>' +
+        '<div class="row"><div class="label required">구성</div><div class="field"><textarea placeholder="각 떡 이름과 개수"></textarea></div></div>' +
+        '<div class="row"><div class="label">상품 설명</div><div class="field"><textarea placeholder="홈페이지 상품 소개 문구"></textarea></div></div>';
+
+    var addBtn = section.querySelector('.btn-add');
+    section.insertBefore(card, addBtn);
+}
+</script>
 </body>
 </html>
