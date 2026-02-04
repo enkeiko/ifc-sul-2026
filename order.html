@@ -485,9 +485,6 @@
 
         <!-- Form -->
         <form id="orderForm" class="form-section">
-            <!-- 신청 유형 (hidden - 주문/상담 통합) -->
-            <input type="hidden" name="type" value="주문/상담">
-
             <!-- 이름 -->
             <div class="form-group">
                 <label class="form-label" for="name">이름<span class="required">*</span></label>
@@ -715,7 +712,6 @@
             // Collect form data
             const totalAmount = calculateTotal();
             const formData = {
-                type: document.querySelector('input[name="type"]').value,
                 name: document.getElementById('name').value,
                 phone: document.getElementById('phone').value,
                 products: [],
