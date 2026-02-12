@@ -155,6 +155,74 @@
             background: #F5EFE7;
         }
 
+        /* Image Slider */
+        .product-slider {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .slider-track img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+        }
+
+        .slider-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .slider-dot.active {
+            background: var(--white);
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .product-slider:hover .slider-nav {
+            opacity: 1;
+        }
+
+        .slider-prev { left: 8px; }
+        .slider-next { right: 8px; }
+
         .product-info {
             padding: 16px 20px 20px;
         }
@@ -443,7 +511,18 @@
 
             <!-- 3구 선물세트 -->
             <a href="product-3gu.html" class="product-card">
-                <img src="images/set2.png" alt="3구 선물세트" class="product-img">
+                <div class="product-slider" data-index="0">
+                    <div class="slider-track">
+                        <img src="images/set2.png" alt="3구 선물세트">
+                        <img src="images/set_3gu_24000.webp" alt="3구 선물세트">
+                    </div>
+                    <div class="slider-dots">
+                        <span class="slider-dot active"></span>
+                        <span class="slider-dot"></span>
+                    </div>
+                    <button class="slider-nav slider-prev" onclick="event.preventDefault(); slideImage(this, -1);">&#10094;</button>
+                    <button class="slider-nav slider-next" onclick="event.preventDefault(); slideImage(this, 1);">&#10095;</button>
+                </div>
                 <div class="product-info">
                     <h3 class="product-name">3구 선물세트</h3>
                     <p class="product-desc">흑임자인절미 + 오색경단 + 콩고물인절미</p>
@@ -453,7 +532,18 @@
 
             <!-- 4구 인절미세트 -->
             <a href="product-4gu.html" class="product-card">
-                <img src="images/set3.png" alt="4구 인절미세트" class="product-img">
+                <div class="product-slider" data-index="0">
+                    <div class="slider-track">
+                        <img src="images/set3.png" alt="4구 인절미세트">
+                        <img src="images/set_4gu_29000.webp" alt="4구 인절미세트">
+                    </div>
+                    <div class="slider-dots">
+                        <span class="slider-dot active"></span>
+                        <span class="slider-dot"></span>
+                    </div>
+                    <button class="slider-nav slider-prev" onclick="event.preventDefault(); slideImage(this, -1);">&#10094;</button>
+                    <button class="slider-nav slider-next" onclick="event.preventDefault(); slideImage(this, 1);">&#10095;</button>
+                </div>
                 <div class="product-info">
                     <h3 class="product-name">4구 인절미세트</h3>
                     <p class="product-desc">4종 콩고물 인절미 (콩/쑥/흑임자/볶은콩)</p>
@@ -463,7 +553,18 @@
 
             <!-- 6구 종합세트 - BEST -->
             <a href="product-6gu.html" class="product-card">
-                <img src="images/set4.png" alt="6구 종합세트" class="product-img">
+                <div class="product-slider" data-index="0">
+                    <div class="slider-track">
+                        <img src="images/set4.png" alt="6구 종합세트">
+                        <img src="images/set_6gu_49000.webp" alt="6구 종합세트">
+                    </div>
+                    <div class="slider-dots">
+                        <span class="slider-dot active"></span>
+                        <span class="slider-dot"></span>
+                    </div>
+                    <button class="slider-nav slider-prev" onclick="event.preventDefault(); slideImage(this, -1);">&#10094;</button>
+                    <button class="slider-nav slider-next" onclick="event.preventDefault(); slideImage(this, 1);">&#10095;</button>
+                </div>
                 <div class="product-info">
                     <span class="product-badge best">BEST</span>
                     <h3 class="product-name">6구 종합세트</h3>
@@ -474,7 +575,18 @@
 
             <!-- 찹쌀떡세트 -->
             <a href="product-chapssal.html" class="product-card">
-                <img src="images/set5.png" alt="찹쌀떡세트" class="product-img">
+                <div class="product-slider" data-index="0">
+                    <div class="slider-track">
+                        <img src="images/set5.png" alt="찹쌀떡세트">
+                        <img src="images/set_chapssal_50000.webp" alt="찹쌀떡세트">
+                    </div>
+                    <div class="slider-dots">
+                        <span class="slider-dot active"></span>
+                        <span class="slider-dot"></span>
+                    </div>
+                    <button class="slider-nav slider-prev" onclick="event.preventDefault(); slideImage(this, -1);">&#10094;</button>
+                    <button class="slider-nav slider-next" onclick="event.preventDefault(); slideImage(this, 1);">&#10095;</button>
+                </div>
                 <div class="product-info">
                     <h3 class="product-name">찹쌀떡세트</h3>
                     <p class="product-desc">15구 프리미엄 찹쌀떡</p>
@@ -484,7 +596,18 @@
 
             <!-- 고급한지세트 - PREMIUM -->
             <a href="product-hanji.html" class="product-card">
-                <img src="images/set6.png" alt="고급한지세트" class="product-img">
+                <div class="product-slider" data-index="0">
+                    <div class="slider-track">
+                        <img src="images/set6.png" alt="고급한지세트">
+                        <img src="images/set_hanji_80000.webp" alt="고급한지세트">
+                    </div>
+                    <div class="slider-dots">
+                        <span class="slider-dot active"></span>
+                        <span class="slider-dot"></span>
+                    </div>
+                    <button class="slider-nav slider-prev" onclick="event.preventDefault(); slideImage(this, -1);">&#10094;</button>
+                    <button class="slider-nav slider-next" onclick="event.preventDefault(); slideImage(this, 1);">&#10095;</button>
+                </div>
                 <div class="product-info">
                     <span class="product-badge new">PREMIUM</span>
                     <h3 class="product-name">고급한지세트</h3>
@@ -586,5 +709,40 @@
             <p class="footer-copy">(C) 2026 원조공주떡집. All rights reserved.</p>
         </footer>
     </div>
+
+    <script>
+        function slideImage(btn, direction) {
+            const slider = btn.closest('.product-slider');
+            const track = slider.querySelector('.slider-track');
+            const dots = slider.querySelectorAll('.slider-dot');
+            const images = track.querySelectorAll('img');
+            let index = parseInt(slider.dataset.index) || 0;
+
+            index += direction;
+            if (index < 0) index = images.length - 1;
+            if (index >= images.length) index = 0;
+
+            slider.dataset.index = index;
+            track.style.transform = `translateX(-${index * 100}%)`;
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+        }
+
+        // Touch swipe support
+        document.querySelectorAll('.product-slider').forEach(slider => {
+            let startX = 0;
+            slider.addEventListener('touchstart', e => {
+                startX = e.touches[0].clientX;
+            });
+            slider.addEventListener('touchend', e => {
+                const diff = startX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 50) {
+                    slideImage(slider.querySelector('.slider-nav'), diff > 0 ? 1 : -1);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
