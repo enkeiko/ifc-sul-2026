@@ -591,10 +591,14 @@
             <!-- 수령 방법 -->
             <div class="form-group">
                 <label class="form-label">수령 방법<span class="required">*</span></label>
-                <div class="radio-group">
+                <div class="radio-group" style="flex-wrap: wrap;">
                     <div class="radio-option">
                         <input type="radio" name="delivery" id="delivery-shipping" value="택배" checked>
                         <label for="delivery-shipping">택배 배송</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="delivery" id="delivery-quick" value="퀵">
+                        <label for="delivery-quick">퀵 배송</label>
                     </div>
                     <div class="radio-option">
                         <input type="radio" name="delivery" id="delivery-pickup" value="픽업">
@@ -611,12 +615,16 @@
 
             <!-- 안내사항 -->
             <div class="notice">
-                <p class="notice-title">📌 안내사항</p>
+                <p class="notice-title">안내사항</p>
                 <p class="notice-text">
                     • 신청 접수 후 영업시간 내 연락드립니다<br>
-                    • 영업시간: 월-금 08:00-21:30<br>
-                    • 설 연휴 3일 전 주문 마감<br>
-                    • 결제는 연락 후 안내드립니다
+                    • 대표: 02-6137-5289 / 상담: 010-7785-4647<br>
+                    • 영업시간: 월~일 07:00~21:00<br>
+                    • 설날당일(2월17일) 휴무<br>
+                    • 택배비: 5,000원 (우체국택배)<br>
+                    • 퀵배송: 서울/경기 (실비)<br>
+                    • 매장픽업: 전일 16시 이전 예약 필수<br>
+                    • 입금계좌: 하나은행 667-910013-64404
                 </p>
             </div>
         </form>
