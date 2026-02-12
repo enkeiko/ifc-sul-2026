@@ -59,37 +59,15 @@
             font-size: 16px;
             font-weight: 600;
         }
-        .product-images {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-        .product-images::-webkit-scrollbar { display: none; }
-        .product-image {
-            width: 100%;
-            aspect-ratio: 1/1;
-            object-fit: cover;
-            background: var(--beige);
-            flex-shrink: 0;
-            scroll-snap-align: start;
-        }
-        .image-indicator {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            padding: 12px;
-            background: var(--white);
-        }
-        .indicator-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(61, 35, 20, 0.2);
-        }
-        .indicator-dot.active {
-            background: var(--gold);
-        }
+        .product-slider { position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden; }
+        .slider-track { display: flex; transition: transform 0.3s ease; height: 100%; }
+        .slider-track img { width: 100%; aspect-ratio: 1/1; object-fit: cover; flex-shrink: 0; }
+        .slider-dots { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
+        .slider-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; }
+        .slider-dot.active { background: var(--white); }
+        .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; cursor: pointer; font-size: 18px; }
+        .slider-prev { left: 12px; }
+        .slider-next { right: 12px; }
         .product-content {
             padding: 24px 20px;
         }
@@ -192,13 +170,15 @@
             <span class="header-title">상품 상세</span>
         </header>
 
-        <div class="product-images" id="imageSlider">
-            <img src="images/set_chapssal_50000.webp" alt="찹쌀떡세트 1" class="product-image">
-            <img src="images/set_chapssal_50000_b.webp" alt="찹쌀떡세트 2" class="product-image">
-        </div>
-        <div class="image-indicator">
-            <span class="indicator-dot active"></span>
-            <span class="indicator-dot"></span>
+        <div class="product-slider" data-index="0">
+            <div class="slider-track">
+                <img src="images/set5.png" alt="찹쌀떡세트">
+                <img src="images/set_chapssal_50000.webp" alt="찹쌀떡세트">
+                <img src="images/set_chapssal_50000_b.webp" alt="찹쌀떡세트">
+            </div>
+            <div class="slider-dots"><span class="slider-dot active"></span><span class="slider-dot"></span><span class="slider-dot"></span></div>
+            <button class="slider-nav slider-prev" onclick="slideImage(-1)">&#10094;</button>
+            <button class="slider-nav slider-next" onclick="slideImage(1)">&#10095;</button>
         </div>
 
         <div class="product-content">
@@ -235,14 +215,23 @@
     </div>
 
     <script>
-        const slider = document.getElementById('imageSlider');
-        const dots = document.querySelectorAll('.indicator-dot');
-
-        slider.addEventListener('scroll', () => {
-            const index = Math.round(slider.scrollLeft / slider.offsetWidth);
-            dots.forEach((dot, i) => {
-                dot.classList.toggle('active', i === index);
-            });
+        function slideImage(dir) {
+            const slider = document.querySelector('.product-slider');
+            const track = slider.querySelector('.slider-track');
+            const dots = slider.querySelectorAll('.slider-dot');
+            const imgs = track.querySelectorAll('img');
+            let idx = parseInt(slider.dataset.index) || 0;
+            idx += dir;
+            if (idx < 0) idx = imgs.length - 1;
+            if (idx >= imgs.length) idx = 0;
+            slider.dataset.index = idx;
+            track.style.transform = `translateX(-${idx * 100}%)`;
+            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        }
+        document.querySelector('.product-slider').addEventListener('touchstart', e => { window.startX = e.touches[0].clientX; });
+        document.querySelector('.product-slider').addEventListener('touchend', e => {
+            const diff = window.startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) slideImage(diff > 0 ? 1 : -1);
         });
     </script>
 </body>

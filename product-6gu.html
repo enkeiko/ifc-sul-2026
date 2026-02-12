@@ -65,6 +65,15 @@
             object-fit: cover;
             background: var(--beige);
         }
+        .product-slider { position: relative; width: 100%; aspect-ratio: 1/1; overflow: hidden; }
+        .slider-track { display: flex; transition: transform 0.3s ease; height: 100%; }
+        .slider-track img { width: 100%; aspect-ratio: 1/1; object-fit: cover; flex-shrink: 0; }
+        .slider-dots { position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
+        .slider-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; }
+        .slider-dot.active { background: var(--white); }
+        .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; background: rgba(255,255,255,0.8); border: none; border-radius: 50%; cursor: pointer; font-size: 18px; }
+        .slider-prev { left: 12px; }
+        .slider-next { right: 12px; }
         .product-content {
             padding: 24px 20px;
         }
@@ -171,7 +180,15 @@
             <span class="header-title">상품 상세</span>
         </header>
 
-        <img src="images/set_6gu_49000.webp" alt="6구 종합세트" class="product-image">
+        <div class="product-slider" data-index="0">
+            <div class="slider-track">
+                <img src="images/set4.png" alt="6구 종합세트">
+                <img src="images/set_6gu_49000.webp" alt="6구 종합세트">
+            </div>
+            <div class="slider-dots"><span class="slider-dot active"></span><span class="slider-dot"></span></div>
+            <button class="slider-nav slider-prev" onclick="slideImage(-1)">&#10094;</button>
+            <button class="slider-nav slider-next" onclick="slideImage(1)">&#10095;</button>
+        </div>
 
         <div class="product-content">
             <span class="product-badge best">BEST 인기상품</span>
@@ -208,5 +225,25 @@
             <a href="order.html" class="cta-btn">주문 신청하기</a>
         </div>
     </div>
+    <script>
+        function slideImage(dir) {
+            const slider = document.querySelector('.product-slider');
+            const track = slider.querySelector('.slider-track');
+            const dots = slider.querySelectorAll('.slider-dot');
+            const imgs = track.querySelectorAll('img');
+            let idx = parseInt(slider.dataset.index) || 0;
+            idx += dir;
+            if (idx < 0) idx = imgs.length - 1;
+            if (idx >= imgs.length) idx = 0;
+            slider.dataset.index = idx;
+            track.style.transform = `translateX(-${idx * 100}%)`;
+            dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        }
+        document.querySelector('.product-slider').addEventListener('touchstart', e => { window.startX = e.touches[0].clientX; });
+        document.querySelector('.product-slider').addEventListener('touchend', e => {
+            const diff = window.startX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) slideImage(diff > 0 ? 1 : -1);
+        });
+    </script>
 </body>
 </html>
